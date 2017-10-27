@@ -188,6 +188,11 @@ public class Solution366 {
         solution366.plusOne(head);
         ListNode.print(head);
         String res = "";
-        
+        int tmp = 6;
+        System.out.println(-tmp);
+
+        tmp &= -tmp;
+            System.out.println(tmp);
+
     }
 }
