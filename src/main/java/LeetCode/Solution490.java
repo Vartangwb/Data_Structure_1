@@ -91,6 +91,8 @@ public class Solution490 {
         return -1;
     }
 
+
+    
     private boolean isInMaze(int x, int y) {
         return x >= 0 && x < m && y >= 0 && y < n;
     }
