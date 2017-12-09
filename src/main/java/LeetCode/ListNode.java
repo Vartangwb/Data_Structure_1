@@ -7,8 +7,8 @@ package LeetCode;
  * @create 2017-10-23 14:46
  **/
 public class ListNode {
-    ListNode next;
-    int data;
+    public ListNode next;
+    public int data;
 
     public ListNode(int data) {
         this.data = data;
