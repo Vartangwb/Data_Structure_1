@@ -8,6 +8,8 @@ package LeetCode.Hard;
  **/
 public class Solution087 {
 
-    
+    public boolean isSeramble(String s1, String s2){
+        return false;
+    }
 
 }

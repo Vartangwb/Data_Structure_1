@@ -1,5 +1,7 @@
 package Algors;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -66,6 +68,47 @@ public class PriorityQueues {
         priorityQueues.putNum(2);
         priorityQueues.putNum(3);
         System.out.println(priorityQueues.getNum());
+        System.out.println(Arrays.stream(priorityQueues.medianSlidingWindow(new int[]{1, 3, -1, -3, 5, 3, 6, 7}, 3)));
     }
+    public double[] medianSlidingWindow(int[] nums, int k) {
+        int len = nums.length - k + 1;
+        double res[] = new double[len];
+        //两个堆，一个最大堆，一个最小
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<Integer>(k, Collections.reverseOrder());
+        PriorityQueue<Integer> minHeap = new PriorityQueue<Integer>(k);
+        for(int i = 0;i<nums.length;i++){
+            int num = nums[i];
+            if(maxHeap.size() == 0 || maxHeap.peek() >= num){
+                maxHeap.add(num);
+            }else{
+                minHeap.add(num);
+            }
+            if(minHeap.size()>maxHeap.size()){
+                maxHeap.add(minHeap.poll());
+            }
+            if(maxHeap.size()>minHeap.size()+1){
+                minHeap.add(maxHeap.poll());
+            }
+            if(i-k+1>=0){
+                if(k%2==1){
+                    res[i-k+1]=maxHeap.peek();
+                }else{
+                    res[i-k+1]=(maxHeap.peek()/2.0+minHeap.peek()/2.0);
+                }
+                int toBeRemove = nums[i-k+1];
+                if(toBeRemove<=maxHeap.peek()){
+                    maxHeap.remove(toBeRemove);
+                }else{
+                    minHeap.remove(toBeRemove);
+                }
+                if( minHeap.size() > maxHeap.size() )
+                    maxHeap.add(minHeap.poll());
+                if( maxHeap.size() > minHeap.size() + 1 )
+                    minHeap.add(maxHeap.poll());
+            }
+        }
+        return res;
+    }
+
 
 }
